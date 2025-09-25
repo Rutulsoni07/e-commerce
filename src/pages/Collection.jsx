@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ShopContext } from "../contexts/ShopContext";
 import { assets } from "../assets/assets";
 import ProductItems from "../components/ProductItems";
+import Title from "../components/Title";
+import Search from "../components/Search";
 
 export default function Collection() {
-
-const { products, search, showSearch } = useContext(ShopContext);
-const [showFilter, setShowFilter] = useState(false);
-const [filterProducts, setFilterProducts] = useState([]);
-const [category, setCategory] = useState([]);
-const [subCategory, setSubCategory] = useState([]);
-const [sortType, setSortType] = useState("relavent");
+  const { products, search, showSearch } = useContext(ShopContext);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filterProducts, setFilterProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [sortType, setSortType] = useState("relavent");
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -28,29 +29,33 @@ const [sortType, setSortType] = useState("relavent");
     }
   };
 
-  const applyFilter = () => {
+  const applyFilter = useCallback(() => {
     let productsCopy = products.slice();
 
     if (showSearch && search) {
-      productsCopy = productsCopy.filter(item =>
+      productsCopy = productsCopy.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
       );
     }
 
     if (category.length > 0) {
-      productsCopy = productsCopy.filter(item =>
+      productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
       );
     }
 
     if (subCategory.length > 0) {
-      productsCopy = productsCopy.filter( item =>
+      productsCopy = productsCopy.filter((item) =>
         subCategory.includes(item.subCategory)
       );
     }
 
     setFilterProducts(productsCopy);
-  };
+  }, [category, subCategory, search, showSearch, products]);
+
+  useEffect(() => {
+    applyFilter();
+  }, [applyFilter]); 
 
   const sortProduct = () => {
     let fpCopy = filterProducts.slice();
@@ -70,9 +75,9 @@ const [sortType, setSortType] = useState("relavent");
     }
   };
 
-  useEffect(() => {
-    applyFilter();
-  }, [category, subCategory, search, showSearch, products]);
+  // useEffect(() => {
+  //   applyFilter();
+  // }, [category, subCategory, search, showSearch, products]);
 
   useEffect(() => {
     sortProduct();
@@ -172,8 +177,8 @@ const [sortType, setSortType] = useState("relavent");
       {/* Right Side */}
       <div className="flex-1">
         <div className="flex justify-between text-base sm:text-2xl mb-4">
-          <h1>ALL COLLECTION </h1>
-          
+          <Title text1={"ALL"} text2={"COLLECTION"} />
+
           {/* Porduct Sort */}
           <select
             onChange={(e) => setSortType(e.target.value)}

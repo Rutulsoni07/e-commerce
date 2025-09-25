@@ -18,33 +18,39 @@ export default function Placedorder() {
             type="text"
             placeholder="First name"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Last name"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
         </div>
         <input
           type="Email"
           placeholder="Email address"
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+          required
         />
         <input
           type="text"
           placeholder="Street"
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+          required
         />
         <div className="flex gap-4">
           <input
             type="text"
             placeholder="City"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
           <input
             type="text"
             placeholder="State"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
         </div>
         <div className="flex gap-4">
@@ -52,17 +58,20 @@ export default function Placedorder() {
             type="number"
             placeholder="Zipcode"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
           <input
             type="text"
             placeholder="Country"
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+            required
           />
         </div>
         <input
           type="number"
           placeholder="Enter Number"
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+          required
         />
       </div>
       {/* right side */}
@@ -72,7 +81,7 @@ export default function Placedorder() {
         </div>
 
         <div className="mt-12">
-          <h1>PAYMENT METHOD</h1>
+          
           {/*payment method  */}
           <div className="flex gap-3 flex-col lg:flex-row">
             <div

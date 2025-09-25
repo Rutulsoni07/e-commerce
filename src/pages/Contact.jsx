@@ -1,11 +1,12 @@
 import React from 'react'
 import { assets } from "../assets/assets";
 import Newsletterbox from '../components/Newsletterbox';
+import Title from '../components/Title';
 export default function Contact() {
   return (
     <div>
       <div className="text-center  text-2xl pt-10 border-t ">
-        <h1>CONTACT US</h1>
+        <Title text1={'CONTACT'} text2={'US'}/>
       </div>
       <div className="my-10 flex flex-col justify-center md:flex-row gap-10 mb-28">
         <img

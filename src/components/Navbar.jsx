@@ -1,13 +1,12 @@
 import {assets} from "../assets/assets"
 import React, { useContext, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom";
 import { ShopContext } from "../contexts/ShopContext";
-
-
 export default function Navbar() {
 
     const [visible, setVisible]= useState(false)
+     const navigate = useNavigate()
      const { setShowSearch ,getCartCount } = useContext(ShopContext);
 
   return (
@@ -43,14 +42,13 @@ export default function Navbar() {
           src={assets.search_icon}
           className="w-5  cursor-pointer"
           onClick={() => {
-            setShowSearch(true);
-            // navigate("/Collection");
+            navigate("/collection", { state: { showSearch: true } });
           }}
           alt=""
         />
 
         <div className="relative group">
-          <Link to='/logIn'>
+          <Link to="/logIn">
             <img
               src={assets.profile_icon}
               className="w-5 cursor-pointer"

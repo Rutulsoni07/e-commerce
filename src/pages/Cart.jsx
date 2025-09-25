@@ -21,7 +21,7 @@ export default function Cart() {
         }
       }
     }
-    setCartData(tempData); // ✅ update state
+    setCartData(tempData); //  update state
   }, [cartItems]);
 
   return (

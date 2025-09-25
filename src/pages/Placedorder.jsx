@@ -1,88 +1,146 @@
-import React, {  useState } from 'react'
-import CartTotal from '../components/CartTotal';
-import { assets } from '../assets/assets';
-import { ShopContext } from '../contexts/ShopContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import CartTotal from "../components/CartTotal";
+import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
+import Title from "../components/Title";
 
 export default function Placedorder() {
-  const [method ,setMethod] = useState('cod')
-  const navigate = useNavigate()
-    return (
+  const [method, setMethod] = useState("cod");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: "",
+    phone: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(""); // clear error when typing
+  };
+
+  const handlePlaceOrder = () => {
+    // Check if any field is empty
+    const isEmpty = Object.values(formData).some((val) => val.trim() === "");
+    if (isEmpty) {
+      setError("⚠️ Please fill up all required fields.");
+      return;
+    }
+
+    // if everything is filled
+    navigate("/orders");
+  };
+
+  return (
     <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]">
       <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
         <div className="text-xl sm:text-2xl my-3">
-          <h1>DELIVERY INFORMATION</h1>
+          <Title text1={"DELIVERY"} text2={"INFORMATION"} />
         </div>
+
         <div className="flex gap-4">
           <input
             type="text"
+            name="firstName"
             placeholder="First name"
+            value={formData.firstName}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
           <input
             type="text"
+            name="lastName"
             placeholder="Last name"
+            value={formData.lastName}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
         </div>
+
         <input
-          type="Email"
+          type="email"
+          name="email"
           placeholder="Email address"
+          value={formData.email}
+          onChange={handleChange}
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-          required
         />
+
         <input
           type="text"
+          name="street"
           placeholder="Street"
+          value={formData.street}
+          onChange={handleChange}
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-          required
         />
+
         <div className="flex gap-4">
           <input
             type="text"
+            name="city"
             placeholder="City"
+            value={formData.city}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
           <input
             type="text"
+            name="state"
             placeholder="State"
+            value={formData.state}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
         </div>
+
         <div className="flex gap-4">
           <input
             type="number"
+            name="zipcode"
             placeholder="Zipcode"
+            value={formData.zipcode}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
           <input
             type="text"
+            name="country"
             placeholder="Country"
+            value={formData.country}
+            onChange={handleChange}
             className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-            required
           />
         </div>
+
         <input
           type="number"
+          name="phone"
           placeholder="Enter Number"
+          value={formData.phone}
+          onChange={handleChange}
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-          required
         />
+
+        {/* Error Message */}
+        {error && <p className="text-red-500 font-bold uppercase  text-sm">{error}</p>}
       </div>
-      {/* right side */}
+
+      {/* Right Side */}
       <div className="mt-8">
         <div className="mt-8 min-w-80">
           <CartTotal />
         </div>
 
         <div className="mt-12">
-          
-          {/*payment method  */}
+          <Title text1={"PAYMENT"} text2={"METHOD"} />
+
           <div className="flex gap-3 flex-col lg:flex-row">
             <div
               onClick={() => setMethod("stripe")}
@@ -120,8 +178,15 @@ export default function Placedorder() {
               </p>
             </div>
           </div>
-          <div className='w-full text-end mt-8'>
-            <button onClick={()=> navigate('/orders')} className='bg-black text-white px-16 py-3 text-sm cursor-pointer'>PLACE ORDER</button>
+
+          {/* Place order button */}
+          <div className="w-full text-end mt-8">
+            <button
+              onClick={handlePlaceOrder}
+              className="bg-black text-white px-16 py-3 text-sm cursor-pointer"
+            >
+              PLACE ORDER
+            </button>
           </div>
         </div>
       </div>

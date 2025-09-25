@@ -17,7 +17,7 @@ export default function LatestContext
       <div className="text-center py-8 text-3xl">
         <Title text1={"LATEST"} text2={"COLLECTION"} />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600 ">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut atque fuga nesciunt, ipsum, cupiditate quidem sint sit, animi dolor earum explicabo nostrum omnis voluptatem sed ad sequi perspiciatis ratione dicta.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut atque fuga nesciunt dicta.
         </p>
       </div>
       {/* rendering product */}
